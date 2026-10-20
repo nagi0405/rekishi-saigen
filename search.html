@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="歴史再現研究所のサイト内検索ページです。">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>サイト内検索 | 歴史再現研究所</title>
   <style>
     * { box-sizing: border-box; }
@@ -171,6 +170,10 @@
       margin: 0;
     }
 
+    .restricted a:hover h2 {
+      text-decoration: underline;
+    }
+
     .empty {
       padding: 24px 0;
       font-size: 14px;
@@ -280,7 +283,7 @@
         title: "研究・技術",
         url: "research.html",
         description: "歴史資料の分析、人物モデルの構築、対話シミュレーションについて紹介します。",
-        keywords: "研究 技術 AI 人工知能 人物モデル 対話 シミュレーション 応答記録"
+        keywords: "研究 技術 AI 人工知能 人物モデル 対話 シミュレーション"
       },
       {
         title: "研究実績",
@@ -291,8 +294,8 @@
     ];
 
     const restrictedResult = {
-      title: "人物モデル応答記録／ODA-NOBUNAGA",
-      description: "分類：内部検証資料。通常の検証手順では想定されていない応答が記録されています。記録の詳細および発生条件については、関連資料を確認してください。"
+      title: "人物モデル 織田信長の応答記録",
+      description: "分類：内部検証資料。人物モデルの応答に関する検証記録です。"
     };
 
     const form = document.getElementById("searchForm");
@@ -338,7 +341,8 @@
         results.appendChild(article);
       });
 
-      if (query.includes("応答記録")) {
+      // 「人物モデル」を含む検索でのみ内部資料を表示
+      if (query.includes("人物モデル")) {
         const restricted = document.createElement("article");
         restricted.className = "restricted";
 
@@ -346,19 +350,23 @@
         label.className = "restricted-label";
         label.textContent = "RESTRICTED RECORD";
 
+        const link = document.createElement("a");
+        link.href = "record.html";
+
         const title = document.createElement("h2");
         title.textContent = restrictedResult.title;
 
         const description = document.createElement("p");
         description.textContent = restrictedResult.description;
 
+        link.appendChild(title);
         restricted.appendChild(label);
-        restricted.appendChild(title);
+        restricted.appendChild(link);
         restricted.appendChild(description);
         results.appendChild(restricted);
       }
 
-      if (matches.length === 0 && !query.includes("応答記録")) {
+      if (matches.length === 0 && !query.includes("人物モデル")) {
         const empty = document.createElement("p");
         empty.className = "empty";
         empty.textContent = "一致する情報は見つかりませんでした。キーワードを変更して、もう一度検索してください。";
