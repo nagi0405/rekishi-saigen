@@ -12,61 +12,66 @@
     header { padding: 22px 7%; display: flex; justify-content: space-between; align-items: center; gap: 24px; border-bottom: 1px solid #e5eaf0; }
     .brand { font-weight: 700; letter-spacing: .06em; white-space: nowrap; }
     .brand span { display: block; font-size: 10px; color: #718096; letter-spacing: .12em; font-weight: 400; }
-    nav { display: flex; flex-wrap: wrap; gap: 18px; font-size: 12px; color: #526174; }
+    .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; min-width: 0; }
+    nav { display: flex; flex-wrap: wrap; gap: 10px 18px; font-size: 12px; color: #526174; align-items: center; }
     nav a:hover { color: #1b4c7d; }
-    .page-hero { padding: 66px 7%; background: #f4f7fb; }
+    .header-search { display: flex; width: min(100%, 330px); gap: 6px; }
+    .header-search input { flex: 1; min-width: 0; padding: 7px 10px; border: 1px solid #cbd5e1; border-radius: 3px; font-size: 12px; }
+    .header-search button { padding: 7px 12px; border: 0; border-radius: 3px; background: #173858; color: white; font-size: 12px; cursor: pointer; }
+    .header-search button:hover { background: #244f7b; }
+    main { max-width: 1000px; margin: 0 auto; padding: 64px 7% 90px; }
     .eyebrow { color: #56718f; font-size: 12px; letter-spacing: .16em; }
-    h1 { color: #102744; font-size: clamp(30px, 4vw, 44px); margin: 10px 0; }
-    .section { padding: 52px 7%; }
-    h2 { color: #102744; font-size: 23px; margin-top: 0; }
+    h1 { color: #102744; font-size: 36px; margin: 10px 0 32px; }
+    p { color: #526174; }
     .message { max-width: 780px; }
-    .message p { margin-bottom: 22px; }
-    .signature { margin-top: 36px; text-align: right; color: #526174; }
+    .signature { margin-top: 40px; text-align: right; color: #243247; }
+    .signature span { display: block; font-size: 13px; color: #637083; }
     footer { background: #102744; color: #d4dfeb; font-size: 12px; text-align: center; }
     .footer-main { padding: 34px 7% 24px; }
     footer .brand { color: #fff; }
     footer .brand span { color: #aebdd0; }
-    footer p { margin: 12px auto; }
+    footer p { margin: 12px 0; }
     .fiction-notice { padding: 14px 20px; background: #0b192b; color: #aebdd0; font-size: 11px; line-height: 1.8; }
     @media (max-width: 760px) {
       header { align-items: flex-start; flex-direction: column; }
-      nav { gap: 10px 16px; }
+      .header-right { align-items: flex-start; width: 100%; }
+      .header-search { width: 100%; }
+      main { padding-top: 44px; }
+      h1 { font-size: 30px; }
     }
   </style>
 </head>
 <body>
   <header>
     <a class="brand" href="index.html">歴史再現研究所<span>HISTORICAL RECONSTRUCTION INSTITUTE</span></a>
-    <nav>
-      <a href="index.html">トップ</a>
-      <a href="about.html">研究所について</a>
-      <a href="director.html">所長挨拶</a>
-      <a href="research.html">研究・技術</a>
-      <a href="achievements.html">研究実績</a>
-    </nav>
+    <div class="header-right">
+      <nav>
+        <a href="index.html">トップ</a>
+        <a href="about.html">研究所について</a>
+        <a href="director.html">所長挨拶</a>
+        <a href="research.html">研究・技術</a>
+        <a href="achievements.html">研究実績</a>
+      </nav>
+      <form class="header-search" action="search.html" method="get">
+        <input type="search" name="q" placeholder="キーワードを入力…" aria-label="サイト内検索" required>
+        <button type="submit">検索</button>
+      </form>
+    </div>
   </header>
 
   <main>
-    <section class="page-hero">
-      <div class="eyebrow">MESSAGE FROM THE DIRECTOR</div>
-      <h1>所長挨拶</h1>
-      <p>過去を知ることは、人間を理解することにつながる。</p>
-    </section>
-
-    <section class="section">
-      <div class="message">
-        <h2>歴史を、より深く理解するために</h2>
-        <p>歴史は、残された記録によって今日まで受け継がれてきました。しかし、記録に記された言葉や行動の背後には、当時の価値観や判断、そして私たちが十分に知ることのできない思考の過程が存在します。</p>
-        <p>歴史再現研究所は、史料の分析と人工知能技術を通じて、歴史上の人物をより多角的に理解するための研究を進めています。人物モデルとの対話は、過去の出来事を新たな視点から検討するための手段のひとつです。</p>
-        <p>私たちが目指すのは、既存の解釈をなぞることだけではありません。想定と異なる結果が得られた場合にも、その理由を探り、検証を重ねることが研究の発展につながると考えています。</p>
-        <p>研究の過程では、予測どおりの結果だけでなく、予測から外れた応答も重要な記録となります。結果を一律に排除するのではなく、条件と経緯を確認し、慎重に分析を続けてまいります。</p>
-        <p>歴史を理解するための試みには、終わりがありません。これからも、記録と検証を積み重ね、研究の可能性を追求してまいります。</p>
-        <div class="signature">
-          歴史再現研究所<br>
-          所長
-        </div>
-      </div>
-    </section>
+    <div class="eyebrow">MESSAGE FROM THE DIRECTOR</div>
+    <h1>所長挨拶</h1>
+    <div class="message">
+      <p>歴史は、過去に起きた出来事を記録したものです。しかし、記録を読むだけで、その時代を生きた人々の考えや判断を十分に理解できるとは限りません。</p>
+      <p>歴史再現研究所では、史料の分析と人工知能技術を組み合わせ、歴史上の人物の価値観や判断の傾向を検証する研究を進めています。</p>
+      <p>人物モデルとの対話は、史料の理解を深めるためのひとつの手段です。その応答が史料と一致する場合だけでなく、事前の想定と一致しない場合にも、慎重に記録し、分析する必要があると考えています。</p>
+      <p>私たちは、過去を単に再現するのではなく、残された記録と向き合いながら、歴史への理解を深めることを目指します。</p>
+    </div>
+    <div class="signature">
+      所長
+      <span>神崎 史郎</span>
+    </div>
   </main>
 
   <footer>
