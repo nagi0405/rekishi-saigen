@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="歴史再現研究所 所長挨拶。歴史資料とAI技術を通じて、過去の人物への理解を深める研究についてご紹介します。">
+  <title>所長挨拶 | 歴史再現研究所</title>
+
+  <style>
+    :root {
+      --navy: #183153;
+      --navy-dark: #10233d;
+      --blue: #466b91;
+      --text: #283444;
+      --muted: #697789;
+      --line: #dfe5ec;
+      --light: #f4f7fa;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family:
+        -apple-system, BlinkMacSystemFont,
+        "Hiragino Kaku Gothic ProN", "Yu Gothic",
+        Meiryo, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.9;
+      letter-spacing: 0.025em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible {
+      outline: 3px solid #8baed3;
+      outline-offset: 4px;
+    }
+
+    .site-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: block;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      display: block;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-en {
+      display: block;
+      margin-top: 2px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .site-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px 22px;
+      font-size: 13px;
+    }
+
+    .site-nav a {
+      color: #475569;
+      padding: 5px 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .site-nav a:hover,
+    .site-nav a[aria-current="page"] {
+      color: var(--navy);
+      border-bottom-color: var(--navy);
+    }
+
+    .page-hero {
+      background: var(--light);
+      border-bottom: 1px solid var(--line);
+      padding: 72px 24px 68px;
+    }
+
+    .page-hero-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--navy-dark);
+      font-size: clamp(30px, 5vw, 44px);
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      line-height: 1.5;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 64px 28px 88px;
+    }
+
+    .greeting {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .greeting p {
+      margin: 0 0 25px;
+      font-size: 15px;
+      line-height: 2.25;
+    }
+
+    .greeting .lead {
+      margin-bottom: 38px;
+      color: var(--navy);
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.9;
+    }
+
+    .section-heading {
+      margin: 58px 0 24px;
+      padding-left: 17px;
+      border-left: 3px solid var(--navy);
+      color: var(--navy);
+      font-size: 21px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .message-panel {
+      margin-top: 50px;
+      padding: 28px 32px;
+      background: var(--light);
+      border: 1px solid var(--line);
+    }
+
+    .message-panel p {
+      margin: 0;
+      font-size: 14px;
+      color: #435166;
+    }
+
+    .signature {
+      margin-top: 54px;
+      text-align: right;
+    }
+
+    .signature-label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .signature-name {
+      display: block;
+      color: var(--navy);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+    }
+
+    .signature-note {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 58px;
+      padding: 10px 0;
+      color: var(--navy);
+      font-size: 13px;
+      border-bottom: 1px solid #9baabd;
+    }
+
+    .back-link:hover {
+      border-bottom-color: var(--navy);
+    }
+
+    .site-footer {
+      padding: 30px 24px;
+      background: var(--navy-dark);
+      color: #dbe4ee;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 24px;
+    }
+
+    .footer-name {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-en {
+      margin: 3px 0 0;
+      color: #aebdd0;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    .copyright {
+      margin: 0;
+      color: #aebdd0;
+      font-size: 11px;
+    }
+
+    @media (max-width: 760px) {
+      .header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 16px;
+        padding: 20px;
+      }
+
+      .site-nav {
+        justify-content: flex-start;
+        gap: 7px 17px;
+      }
+
+      .page-hero {
+        padding: 50px 22px;
+      }
+
+      main {
+        padding: 46px 22px 64px;
+      }
+
+      .greeting .lead {
+        font-size: 18px;
+      }
+
+      .message-panel {
+        padding: 22px;
+      }
+
+      .section-heading {
+        margin-top: 44px;
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-name">歴史再現研究所</span>
+        <span class="brand-en">HISTORICAL RECONSTRUCTION INSTITUTE</span>
+      </a>
+
+      <nav class="site-nav" aria-label="メインナビゲーション">
+        <a href="index.html">トップページ</a>
+        <a href="about.html">研究所について</a>
+        <a href="director.html" aria-current="page">所長挨拶</a>
+        <a href="research.html">研究・技術</a>
+        <a href="achievements.html">研究実績</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <p class="eyebrow">MESSAGE FROM THE DIRECTOR</p>
+      <h1>所長挨拶</h1>
+      <p class="hero-description">
+        過去を知ることは、人間を理解することにつながる。
+        私たちは、その可能性を技術によって広げていきます。
+      </p>
+    </div>
+  </section>
+
+  <main>
+    <article class="greeting">
+      <p class="lead">
+        歴史に残された言葉や記録の向こう側には、
+        どのような人間の姿があったのでしょうか。
+      </p>
+
+      <p>
+        歴史は、出来事の記録だけで成り立つものではありません。
+        そこには、時代を生きた人々の判断や信念、葛藤、
+        そして周囲の人々との関係が刻まれています。
+      </p>
+
+      <p>
+        しかし、私たちが過去の人物について知ることのできる情報には
+        限りがあります。残された史料を読み解くことはできても、
+        その人物が何を考え、何を重視し、どのような判断を下したのかを
+        十分に理解することは容易ではありません。
+      </p>
+
+      <p>
+        歴史再現研究所は、歴史資料の調査・分析と人工知能技術を
+        組み合わせることで、過去の人物に対する理解を深めることを
+        目指して設立されました。
+      </p>
+
+      <h2 class="section-heading">史料に基づく理解を、次の段階へ</h2>
+
+      <p>
+        私たちが取り組んでいるのは、史料に記された情報を整理するだけの
+        研究ではありません。人物の発言や行動、当時の社会背景、
+        思想や価値観を多角的に分析し、それらの関係性を
+        人工知能モデルとして構築する研究です。
+      </p>
+
+      <p>
+        モデルとの対話や応答の検証を通じて、既存の資料から得られる
+        知見を別の角度から捉え直す。その過程で生まれた問いを
+        再び史料の調査へとつなげることで、歴史研究に新たな視点を
+        もたらしたいと考えています。
+      </p>
+
+      <p>
+        もちろん、モデルによる応答が歴史上の人物本人の考えを
+        そのまま示すわけではありません。資料から確認できる事実と、
+        分析に基づく推定とを区別し、研究結果を慎重に評価することが
+        不可欠です。
+      </p>
+
+      <h2 class="section-heading">技術の進歩と、研究者の責任</h2>
+
+      <p>
+        人工知能の発展によって、過去の人物の言葉や判断を
+        模擬的に検討することが可能になりつつあります。
+        その一方で、技術によって再現されたものを何と呼び、
+        どこまでを研究上の知見として扱うべきかという問いも
+        生まれています。
+      </p>
+
+      <p>
+        私たちは、技術の可能性を追求することと、
+        その結果を冷静に検証することの両方を大切にしています。
+        歴史資料への敬意を忘れず、再現の限界を認識しながら、
+        一つひとつの研究を積み重ねてまいります。
+      </p>
+
+      <div class="message-panel">
+        <p>
+          過去を単に再現するのではなく、過去と向き合うための
+          新たな手段をつくること。それが、歴史再現研究所の
+          目指す研究です。今後とも、皆様のご理解とご支援を
+          賜りますようお願い申し上げます。
+        </p>
+      </div>
+
+      <div class="signature">
+        <span class="signature-label">歴史再現研究所</span>
+        <span class="signature-name">所長</span>
+        <span class="signature-note">Director, Historical Reconstruction Institute</span>
+      </div>
+
+      <a class="back-link" href="index.html">← トップページへ戻る</a>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-name">歴史再現研究所</p>
+        <p class="footer-en">HISTORICAL RECONSTRUCTION INSTITUTE</p>
+      </div>
+      <p class="copyright">
+        © Historical Reconstruction Institute
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
