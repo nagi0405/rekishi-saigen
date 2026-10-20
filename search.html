@@ -170,9 +170,7 @@
       margin: 0;
     }
 
-    .restricted a:hover h2 {
-      text-decoration: underline;
-    }
+    .restricted a:hover h2 { text-decoration: underline; }
 
     .empty {
       padding: 24px 0;
@@ -293,10 +291,23 @@
       }
     ];
 
-    const restrictedResult = {
-      title: "【資料】人物モデル 織田信長の応答記録",
-      description: "分類：内部検証資料。人物モデルの応答に関する検証記録です。"
-    };
+    const restrictedResults = [
+      {
+        title: "【資料】人物モデル 織田信長の応答記録",
+        url: "record.html",
+        description: "分類：内部検証資料。人物モデルの応答に関する検証記録です。"
+      },
+      {
+        title: "【資料】人物モデル 徳川家康の応答記録",
+        url: "record-ieyasu.html",
+        description: "分類：内部検証資料。人物モデルの応答傾向および一貫性に関する検証記録です。"
+      },
+      {
+        title: "【資料】人物モデル 豊臣秀吉の応答記録",
+        url: "record-hideyoshi.html",
+        description: "分類：内部検証資料。人物モデルの対話傾向に関する検証記録です。"
+      }
+    ];
 
     const form = document.getElementById("searchForm");
     const input = document.getElementById("searchInput");
@@ -343,27 +354,29 @@
 
       // 「人物モデル」を含む検索でのみ内部資料を表示
       if (query.includes("人物モデル")) {
-        const restricted = document.createElement("article");
-        restricted.className = "restricted";
+        restrictedResults.forEach(record => {
+          const article = document.createElement("article");
+          article.className = "restricted";
 
-        const label = document.createElement("div");
-        label.className = "restricted-label";
-        label.textContent = "RESTRICTED RECORD";
+          const label = document.createElement("div");
+          label.className = "restricted-label";
+          label.textContent = "RESTRICTED RECORD";
 
-        const link = document.createElement("a");
-        link.href = "record.html";
+          const link = document.createElement("a");
+          link.href = record.url;
 
-        const title = document.createElement("h2");
-        title.textContent = restrictedResult.title;
+          const title = document.createElement("h2");
+          title.textContent = record.title;
 
-        const description = document.createElement("p");
-        description.textContent = restrictedResult.description;
+          const description = document.createElement("p");
+          description.textContent = record.description;
 
-        link.appendChild(title);
-        restricted.appendChild(label);
-        restricted.appendChild(link);
-        restricted.appendChild(description);
-        results.appendChild(restricted);
+          link.appendChild(title);
+          article.appendChild(label);
+          article.appendChild(link);
+          article.appendChild(description);
+          results.appendChild(article);
+        });
       }
 
       if (matches.length === 0 && !query.includes("人物モデル")) {
