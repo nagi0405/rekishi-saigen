@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="歴史再現研究所のサイト内検索ページです。">
   <title>サイト内検索 | 歴史再現研究所</title>
+
   <style>
     * { box-sizing: border-box; }
 
@@ -213,6 +214,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <a class="brand" href="index.html">
@@ -296,25 +298,31 @@
         title: "【資料】人物モデル 織田信長の応答記録",
         url: "record.html",
         description: "分類：内部検証資料。人物モデルの応答に関する検証記録です。",
-        keyword: "人物モデル"
+        keywords: ["人物モデル"]
       },
       {
         title: "【資料】人物モデル 徳川家康の応答記録",
         url: "record-ieyasu.html",
         description: "分類：内部検証資料。人物モデルの応答傾向および一貫性に関する検証記録です。",
-        keyword: "人物モデル"
+        keywords: ["人物モデル"]
       },
       {
         title: "【資料】人物モデル 豊臣秀吉の応答記録",
         url: "record-hideyoshi.html",
         description: "分類：内部検証資料。人物モデルの対話傾向に関する検証記録です。",
-        keyword: "人物モデル"
+        keywords: ["人物モデル"]
       },
       {
         title: "【内部資料】人物調査記録：神崎史郎",
         url: "record-kanzaki.html",
         description: "分類：所内限定。歴史再現計画の発案者に関する人物調査記録です。",
-        keyword: "神崎史郎"
+        keywords: ["神崎史郎", "人物調査記録"]
+      },
+      {
+        title: "【内部資料】人物調査記録：調査対象者",
+        url: "record-friend.html",
+        description: "分類：所内限定。研究所に関係する人物についての調査記録です。",
+        keywords: ["人物調査記録"]
       }
     ];
 
@@ -324,6 +332,7 @@
 
     function runSearch() {
       const query = input.value.trim().toLowerCase();
+
       results.replaceChildren();
 
       if (!query) return;
@@ -358,13 +367,9 @@
         results.appendChild(article);
       });
 
-      const matchedRestrictedResults = restrictedResults.filter(record => {
-        if (record.keyword === "神崎史郎") {
-          return query.includes("神崎史郎");
-        }
-
-        return query.includes("人物モデル");
-      });
+      const matchedRestrictedResults = restrictedResults.filter(record =>
+        record.keywords.some(keyword => query.includes(keyword.toLowerCase()))
+      );
 
       matchedRestrictedResults.forEach(record => {
         const article = document.createElement("article");
@@ -393,7 +398,8 @@
       if (matches.length === 0 && matchedRestrictedResults.length === 0) {
         const empty = document.createElement("p");
         empty.className = "empty";
-        empty.textContent = "一致する情報は見つかりませんでした。キーワードを変更して、もう一度検索してください。";
+        empty.textContent =
+          "一致する情報は見つかりませんでした。キーワードを変更して、もう一度検索してください。";
         results.appendChild(empty);
       }
     }
