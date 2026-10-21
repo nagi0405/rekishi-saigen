@@ -91,11 +91,6 @@
       color: #263449;
     }
 
-    .search-form input:focus {
-      outline: 2px solid #8ba3c1;
-      outline-offset: 1px;
-    }
-
     .search-form button {
       padding: 11px 23px;
       background: #172b49;
@@ -140,7 +135,6 @@
       padding: 20px 22px;
       color: inherit;
       text-decoration: none;
-      transition: background 0.15s;
     }
 
     .result-item:hover {
@@ -173,30 +167,13 @@
       margin-top: 8px;
     }
 
-    .empty-state {
-      background: #fff;
-      border: 1px solid #dce2e9;
-      border-top: none;
-      padding: 35px 20px;
-      text-align: center;
-      color: #68788d;
-      font-size: 13px;
-    }
-
+    .empty-state,
     .initial-state {
       background: #fff;
       border: 1px solid #dce2e9;
-      padding: 22px;
-      font-size: 13px;
+      padding: 25px;
       color: #68788d;
-    }
-
-    .initial-state p {
-      margin: 0 0 10px;
-    }
-
-    .initial-state p:last-child {
-      margin-bottom: 0;
+      font-size: 13px;
     }
 
     .initial-state button {
@@ -274,8 +251,7 @@
     </p>
 
     <section class="search-box">
-      <form class="search-form" id="searchForm" action="search.html"
-        method="get">
+      <form class="search-form" id="searchForm">
         <input
           type="search"
           id="searchInput"
@@ -287,8 +263,7 @@
       </form>
     </section>
 
-    <section id="resultsArea" aria-live="polite">
-    </section>
+    <section id="resultsArea" aria-live="polite"></section>
 
     <a class="back-link" href="index.html">
       ← トップページに戻る
@@ -300,7 +275,6 @@
   </footer>
 
   <script>
-    // 一般公開されているページ
     const publicResults = [
       {
         title: "研究所について",
@@ -332,7 +306,6 @@
       }
     ];
 
-    // 研究資料
     const researchRecords = [
       {
         title: "織田信長 人物モデル記録",
@@ -357,14 +330,13 @@
       }
     ];
 
-    // 通常のサイト閲覧では目立たない内部資料
     const restrictedResults = [
       {
         title: "人物調査記録",
         description: "所長に関する人物情報および関連記録。",
         category: "人物調査記録",
         url: "record-kanzaki.html",
-        keywords: ["神崎史郎", "人物調査記録"]
+        keywords: ["人物調査記録", "神崎史郎", "神崎"]
       },
       {
         title: "人物調査記録",
@@ -373,6 +345,12 @@
         url: "record-friend.html",
         keywords: ["人物調査記録"]
       }
+    ];
+
+    const allResults = [
+      ...publicResults,
+      ...researchRecords,
+      ...restrictedResults
     ];
 
     const form = document.getElementById("searchForm");
@@ -392,10 +370,13 @@
       `;
     }
 
-    function createResultElement(item) {
+    function createResultElement(item, query) {
       const link = document.createElement("a");
       link.className = "result-item";
-      link.href = item.url;
+
+      // 資料を開く前の検索語をURLに保存
+      link.href = item.url + "?fromSearch=" +
+        encodeURIComponent(query);
 
       const category = document.createElement("div");
       category.className = "result-category";
@@ -428,16 +409,6 @@
         return;
       }
 
-      /*
-       * 完全な検索語句に対応する資料を優先。
-       * 内部資料は登録されたキーワードに一致した場合のみ表示。
-       */
-      const allResults = [
-        ...publicResults,
-        ...researchRecords,
-        ...restrictedResults
-      ];
-
       const matchedResults = allResults.filter(item =>
         item.keywords.some(keyword =>
           normalizedQuery.includes(keyword.toLowerCase())
@@ -452,7 +423,7 @@
 
       const count = document.createElement("span");
       count.className = "result-count";
-      count.textContent = `${matchedResults.length}件`;
+      count.textContent = matchedResults.length + "件";
 
       heading.append(headingTitle, count);
       resultsArea.appendChild(heading);
@@ -467,27 +438,30 @@
       }
 
       matchedResults.forEach(item => {
-        resultsArea.appendChild(createResultElement(item));
+        resultsArea.appendChild(createResultElement(item, query));
       });
+    }
+
+    function updateAddress(query) {
+      const url = new URL(window.location.href);
+
+      if (query) {
+        url.searchParams.set("q", query);
+      } else {
+        url.searchParams.delete("q");
+      }
+
+      history.replaceState({}, "", url.pathname + url.search);
     }
 
     form.addEventListener("submit", event => {
       event.preventDefault();
 
       const query = input.value.trim();
-      const params = new URLSearchParams();
-
-      if (query) {
-        params.set("q", query);
-        history.pushState({}, "", "search.html?" + params.toString());
-      } else {
-        history.pushState({}, "", "search.html");
-      }
-
+      updateAddress(query);
       search(query);
     });
 
-    // 検索例をクリックしたとき
     resultsArea.addEventListener("click", event => {
       const button = event.target.closest("button[data-query]");
 
@@ -495,25 +469,19 @@
 
       const query = button.dataset.query;
       input.value = query;
+      updateAddress(query);
       search(query);
-
-      const params = new URLSearchParams();
-      params.set("q", query);
-      history.pushState({}, "", "search.html?" + params.toString());
     });
 
-    // URLに ?q=人物調査記録 などが付いている場合
     const params = new URLSearchParams(window.location.search);
     const initialQuery = params.get("q") || "";
 
     input.value = initialQuery;
     search(initialQuery);
 
-    // ブラウザの戻る・進むにも対応
     window.addEventListener("popstate", () => {
-      const currentParams = new URLSearchParams(
-        window.location.search
-      );
+      const currentParams =
+        new URLSearchParams(window.location.search);
       const query = currentParams.get("q") || "";
 
       input.value = query;
