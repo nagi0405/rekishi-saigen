@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -234,7 +233,7 @@
   <header>
     <div class="site-name">歴史再現研究所</div>
     <div class="site-subtitle">
-      HISTORY RECONSTRUCTION INSTITUTE
+      HISTORICAL RECONSTRUCTION INSTITUTE
     </div>
   </header>
 
@@ -271,7 +270,7 @@
   </main>
 
   <footer>
-    © 歴史再現研究所 HISTORY RECONSTRUCTION INSTITUTE
+    © 歴史再現研究所 HISTORICAL RECONSTRUCTION INSTITUTE
   </footer>
 
   <script>
@@ -284,11 +283,11 @@
         keywords: ["研究所", "概要", "設立", "沿革"]
       },
       {
-        title: "研究理念",
-        description: "当研究所が掲げる研究方針と基本理念。",
+        title: "研究・技術",
+        description: "思念型歴史個体（思念体）の構築・検証方針。",
         category: "研究案内",
         url: "research.html",
-        keywords: ["研究理念", "研究方針", "理念"]
+        keywords: ["研究", "技術", "理念", "方針", "思念体", "個体", "思念型歴史個体"]
       },
       {
         title: "研究実績",
@@ -308,42 +307,42 @@
 
     const researchRecords = [
       {
-        title: "織田信長 人物モデル記録",
-        description: "織田信長に関する人物モデルの研究記録。",
+        title: "織田信長 思念体記録",
+        description: "織田信長に関する思念体（ODA-NOBUNAGA）の研究記録。",
         category: "研究資料",
         url: "record.html",
-        keywords: ["人物モデル", "織田信長", "信長"]
+        keywords: ["思念体", "個体", "織田信長", "信長", "ODA-NOBUNAGA"]
       },
       {
-        title: "徳川家康 人物モデル記録",
-        description: "徳川家康に関する人物モデルの研究記録。",
+        title: "徳川家康 思念体記録",
+        description: "徳川家康に関する思念体（TOKUGAWA-IEYASU）の研究記録。",
         category: "研究資料",
         url: "record-ieyasu.html",
-        keywords: ["人物モデル", "徳川家康", "家康"]
+        keywords: ["思念体", "個体", "徳川家康", "家康", "TOKUGAWA-IEYASU"]
       },
       {
-        title: "豊臣秀吉 人物モデル記録",
-        description: "豊臣秀吉に関する人物モデルの研究記録。",
+        title: "豊臣秀吉 思念体記録",
+        description: "豊臣秀吉に関する思念体（TOYOTOMI-HIDEYOSHI）の研究記録。",
         category: "研究資料",
         url: "record-hideyoshi.html",
-        keywords: ["人物モデル", "豊臣秀吉", "秀吉"]
+        keywords: ["思念体", "個体", "豊臣秀吉", "秀吉", "TOYOTOMI-HIDEYOSHI"]
       }
     ];
 
     const restrictedResults = [
       {
-        title: "人物調査記録",
+        title: "人物調査記録：神崎史郎",
         description: "所長に関する人物情報および関連記録。",
-        category: "人物調査記録",
+        category: "内部資料",
         url: "record-kanzaki.html",
-        keywords: ["人物調査記録", "神崎史郎", "神崎"]
+        keywords: ["人物調査記録", "神崎史郎", "神崎", "HRK-001"]
       },
       {
-        title: "人物調査記録",
+        title: "人物調査記録：研究補助部門職員",
         description: "研究補助部門 職員基本情報・勤務評価。",
-        category: "人物調査記録",
+        category: "内部資料",
         url: "record-friend.html",
-        keywords: ["人物調査記録"]
+        keywords: ["人物調査記録", "職員", "アルバイト", "勤務評価"]
       }
     ];
 
@@ -363,8 +362,8 @@
           <p>検索キーワードを入力してください。</p>
           <p>
             例：
-            <button type="button" data-query="研究所">研究所</button>　
-            <button type="button" data-query="人物モデル">人物モデル</button>
+            <button type="button" data-query="研究所">研究所</button> 
+            <button type="button" data-query="思念体">思念体</button>
           </p>
         </div>
       `;
@@ -374,7 +373,6 @@
       const link = document.createElement("a");
       link.className = "result-item";
 
-      // 資料を開く前の検索語をURLに保存
       link.href = item.url + "?fromSearch=" +
         encodeURIComponent(query);
 
