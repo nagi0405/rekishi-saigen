@@ -249,10 +249,12 @@
         従事することが期待される。
       </p>
       
+
 <a class="back-link" href="search.html"
-   onclick="if (new URLSearchParams(location.search).has('fromSearch')) { location.href = 'search.html?q=' + encodeURIComponent(new URLSearchParams(location.search).get('fromSearch')); return false; }">
+   onclick="const q = new URLSearchParams(window.location.search).get('fromSearch'); if (q !== null) { window.location.href = 'search.html?q=' + encodeURIComponent(q); return false; }">
   ← 検索結果に戻る
 </a>
+
 
       </a>
 
