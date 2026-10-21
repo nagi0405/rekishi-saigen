@@ -4,425 +4,521 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="歴史再現研究所のサイト内検索ページです。">
-  <title>サイト内検索 | 歴史再現研究所</title>
+  <meta name="robots" content="noindex, nofollow">
+  <title>サイト内検索｜歴史再現研究所</title>
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Noto Sans JP", sans-serif;
-      color: #243247;
-      line-height: 1.9;
-      background: #fff;
+      background: #f4f6f9;
+      color: #263449;
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN",
+        Meiryo, sans-serif;
+      line-height: 1.8;
     }
-
-    a { color: inherit; text-decoration: none; }
 
     header {
+      background: #172b49;
+      color: white;
       padding: 22px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      border-bottom: 1px solid #e5eaf0;
     }
 
-    .brand {
-      font-weight: 700;
-      letter-spacing: .06em;
-      white-space: nowrap;
+    .site-name {
+      font-size: 19px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
     }
 
-    .brand span {
-      display: block;
-      font-size: 10px;
-      color: #718096;
-      letter-spacing: .12em;
-      font-weight: 400;
+    .site-subtitle {
+      font-size: 11px;
+      color: #c6d1e0;
+      letter-spacing: 0.12em;
     }
 
     nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 18px;
+      background: #fff;
+      border-bottom: 1px solid #dce2e9;
+      padding: 10px 7%;
       font-size: 12px;
-      color: #526174;
-      align-items: center;
     }
 
-    nav a:hover { color: #1b4c7d; }
+    nav a {
+      color: #526783;
+      text-decoration: none;
+    }
 
     main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 64px 7% 90px;
-      min-height: 65vh;
-    }
-
-    .eyebrow {
-      color: #56718f;
-      font-size: 12px;
-      letter-spacing: .16em;
+      max-width: 900px;
+      margin: 38px auto;
+      padding: 0 20px;
     }
 
     h1 {
-      color: #102744;
-      font-size: 34px;
-      margin: 10px 0;
+      font-size: 25px;
+      color: #172b49;
+      margin-bottom: 5px;
     }
 
-    .intro {
-      color: #637083;
-      font-size: 14px;
+    .lead {
+      color: #68788d;
+      font-size: 13px;
+      margin-bottom: 26px;
+    }
+
+    .search-box {
+      background: #fff;
+      border: 1px solid #d5dce5;
+      padding: 24px;
       margin-bottom: 28px;
     }
 
     .search-form {
       display: flex;
       gap: 10px;
-      width: 100%;
-      margin: 24px 0 36px;
     }
 
     .search-form input {
       flex: 1;
       min-width: 0;
-      padding: 14px 16px;
-      border: 1px solid #cbd5e1;
-      border-radius: 3px;
+      padding: 12px 14px;
+      border: 1px solid #c7d0dc;
+      border-radius: 2px;
       font-size: 15px;
-      color: #243247;
-      background: #fff;
+      color: #263449;
     }
 
     .search-form input:focus {
-      outline: 2px solid #8aa8c8;
-      outline-offset: 2px;
+      outline: 2px solid #8ba3c1;
+      outline-offset: 1px;
     }
 
     .search-form button {
-      padding: 12px 24px;
-      border: 0;
-      border-radius: 3px;
-      background: #173858;
-      color: #fff;
+      padding: 11px 23px;
+      background: #172b49;
+      color: white;
+      border: none;
+      border-radius: 2px;
       font-size: 14px;
       cursor: pointer;
     }
 
-    .search-form button:hover { background: #244f7b; }
+    .search-form button:hover {
+      background: #2b4569;
+    }
 
     .result-heading {
-      font-size: 18px;
-      color: #102744;
-      border-bottom: 1px solid #dce4ed;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      border-bottom: 1px solid #cbd4df;
       padding-bottom: 10px;
-      margin-top: 30px;
+      margin-bottom: 0;
     }
 
-    .result {
-      padding: 20px 0;
-      border-bottom: 1px solid #e5eaf0;
-    }
-
-    .result h2 {
+    .result-heading h2 {
       font-size: 17px;
-      color: #244f7b;
-      margin: 0 0 6px;
+      margin: 0;
+      color: #172b49;
     }
 
-    .result p {
-      font-size: 14px;
-      color: #637083;
+    .result-count {
+      font-size: 12px;
+      color: #718096;
+      white-space: nowrap;
+    }
+
+    .result-item {
+      display: block;
+      background: #fff;
+      border: 1px solid #dce2e9;
+      border-top: none;
+      padding: 20px 22px;
+      color: inherit;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .result-item:hover {
+      background: #f8fafd;
+    }
+
+    .result-category {
+      color: #667d9a;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .result-title {
+      color: #244b7b;
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .result-description {
+      color: #526174;
+      font-size: 13px;
       margin: 0;
     }
 
-    .result a:hover h2 { text-decoration: underline; }
-
-    .restricted {
-      margin-top: 24px;
-      padding: 20px;
-      border: 1px solid #d7dfe8;
-      border-left: 4px solid #173858;
-      background: #f7f9fc;
+    .result-meta {
+      font-size: 11px;
+      color: #8a96a5;
+      margin-top: 8px;
     }
 
-    .restricted-label {
+    .empty-state {
+      background: #fff;
+      border: 1px solid #dce2e9;
+      border-top: none;
+      padding: 35px 20px;
+      text-align: center;
+      color: #68788d;
+      font-size: 13px;
+    }
+
+    .initial-state {
+      background: #fff;
+      border: 1px solid #dce2e9;
+      padding: 22px;
+      font-size: 13px;
+      color: #68788d;
+    }
+
+    .initial-state p {
+      margin: 0 0 10px;
+    }
+
+    .initial-state p:last-child {
+      margin-bottom: 0;
+    }
+
+    .initial-state button {
+      background: none;
+      border: none;
+      padding: 0;
+      color: #244b7b;
+      text-decoration: underline;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .back-link {
       display: inline-block;
-      font-size: 10px;
-      letter-spacing: .12em;
-      color: #526174;
-      border: 1px solid #bdc9d7;
-      padding: 2px 8px;
-      margin-bottom: 10px;
-    }
-
-    .restricted h2 {
-      color: #173858;
-      font-size: 17px;
-      margin: 0 0 8px;
-    }
-
-    .restricted p {
-      font-size: 14px;
-      color: #526174;
-      margin: 0;
-    }
-
-    .restricted a:hover h2 { text-decoration: underline; }
-
-    .empty {
-      padding: 24px 0;
-      font-size: 14px;
-      color: #637083;
+      margin-top: 28px;
+      font-size: 13px;
+      color: #284b78;
+      text-decoration: none;
     }
 
     footer {
-      background: #102744;
-      color: #d4dfeb;
-      font-size: 12px;
       text-align: center;
-    }
-
-    .footer-main { padding: 34px 7% 24px; }
-
-    footer .brand { color: #fff; }
-    footer .brand span { color: #aebdd0; }
-    footer p { margin: 12px 0; }
-
-    .fiction-notice {
-      padding: 14px 20px;
-      background: #0b192b;
-      color: #aebdd0;
+      padding: 25px 15px;
+      color: #7c8999;
       font-size: 11px;
-      line-height: 1.8;
+      margin-top: 25px;
     }
 
-    @media (max-width: 760px) {
-      header {
-        align-items: flex-start;
+    @media (max-width: 600px) {
+      main {
+        margin-top: 25px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .search-box {
+        padding: 16px;
+      }
+
+      .search-form {
         flex-direction: column;
       }
 
-      main { padding-top: 44px; }
+      .search-form button {
+        padding: 12px;
+      }
 
-      h1 { font-size: 29px; }
-
-      .search-form button { padding: 12px 16px; }
+      .result-item {
+        padding: 17px;
+      }
     }
   </style>
 </head>
 
 <body>
   <header>
-    <a class="brand" href="index.html">
-      歴史再現研究所
-      <span>HISTORICAL RECONSTRUCTION INSTITUTE</span>
-    </a>
-
-    <nav>
-      <a href="index.html">トップ</a>
-      <a href="about.html">研究所について</a>
-      <a href="director.html">所長挨拶</a>
-      <a href="research.html">研究・技術</a>
-      <a href="achievements.html">研究実績</a>
-    </nav>
+    <div class="site-name">歴史再現研究所</div>
+    <div class="site-subtitle">
+      HISTORY RECONSTRUCTION INSTITUTE
+    </div>
   </header>
 
+  <nav>
+    <a href="index.html">トップページ</a>
+    ＞ サイト内検索
+  </nav>
+
   <main>
-    <div class="eyebrow">SITE SEARCH</div>
     <h1>サイト内検索</h1>
-    <p class="intro">研究所の公開情報を検索できます。キーワードを入力してください。</p>
 
-    <form class="search-form" id="searchForm">
-      <input
-        type="search"
-        id="searchInput"
-        name="q"
-        placeholder="キーワードを入力…"
-        aria-label="検索キーワード"
-        required
-      >
-      <button type="submit">検索</button>
-    </form>
+    <p class="lead">
+      当研究所の活動内容・研究資料等を検索できます。
+    </p>
 
-    <div id="results" aria-live="polite"></div>
+    <section class="search-box">
+      <form class="search-form" id="searchForm" action="search.html"
+        method="get">
+        <input
+          type="search"
+          id="searchInput"
+          name="q"
+          placeholder="検索キーワードを入力"
+          aria-label="検索キーワード"
+        >
+        <button type="submit">検索</button>
+      </form>
+    </section>
+
+    <section id="resultsArea" aria-live="polite">
+    </section>
+
+    <a class="back-link" href="index.html">
+      ← トップページに戻る
+    </a>
   </main>
 
   <footer>
-    <div class="footer-main">
-      <div class="brand">
-        歴史再現研究所
-        <span>HISTORICAL RECONSTRUCTION INSTITUTE</span>
-      </div>
-      <p>歴史資料の分析と人物モデルの研究を通じて、新たな理解を目指します。</p>
-      <p>© Historical Reconstruction Institute</p>
-    </div>
-    <div class="fiction-notice">
-      当サイトはフィクションです。掲載されている人物・団体・研究内容は創作であり、実在のものとは関係ありません。
-    </div>
+    © 歴史再現研究所 HISTORY RECONSTRUCTION INSTITUTE
   </footer>
 
   <script>
-    const pages = [
+    // 一般公開されているページ
+    const publicResults = [
       {
         title: "研究所について",
+        description: "歴史再現研究所の設立目的、沿革、基本情報。",
+        category: "研究所案内",
         url: "about.html",
-        description: "歴史再現研究所の設立目的、基本方針、主な活動について紹介します。",
-        keywords: "研究所 設立 目的 基本方針 活動 歴史 資料"
+        keywords: ["研究所", "概要", "設立", "沿革"]
       },
       {
-        title: "所長挨拶",
-        url: "director.html",
-        description: "所長より、研究所の理念と歴史研究に対する考え方をご紹介します。",
-        keywords: "所長 挨拶 理念 研究 方針 神崎 史郎 神崎史郎"
-      },
-      {
-        title: "研究・技術",
+        title: "研究理念",
+        description: "当研究所が掲げる研究方針と基本理念。",
+        category: "研究案内",
         url: "research.html",
-        description: "歴史資料の分析、人物モデルの構築、対話シミュレーションについて紹介します。",
-        keywords: "研究 技術 AI 人工知能 人物モデル 対話 シミュレーション"
+        keywords: ["研究理念", "研究方針", "理念"]
       },
       {
         title: "研究実績",
+        description: "当研究所における研究活動および主な実績。",
+        category: "研究案内",
         url: "achievements.html",
-        description: "織田信長、豊臣秀吉、徳川家康を対象とした人物モデルの研究状況を掲載しています。",
-        keywords: "研究実績 信長 織田信長 秀吉 豊臣秀吉 家康 徳川家康 モデル"
+        keywords: ["研究実績", "実績", "成果"]
+      },
+      {
+        title: "所長紹介",
+        description: "歴史再現研究所 所長・神崎史郎について。",
+        category: "研究所案内",
+        url: "director.html",
+        keywords: ["所長", "神崎史郎", "神崎", "人物紹介"]
       }
     ];
 
+    // 研究資料
+    const researchRecords = [
+      {
+        title: "織田信長 人物モデル記録",
+        description: "織田信長に関する人物モデルの研究記録。",
+        category: "研究資料",
+        url: "record.html",
+        keywords: ["人物モデル", "織田信長", "信長"]
+      },
+      {
+        title: "徳川家康 人物モデル記録",
+        description: "徳川家康に関する人物モデルの研究記録。",
+        category: "研究資料",
+        url: "record-ieyasu.html",
+        keywords: ["人物モデル", "徳川家康", "家康"]
+      },
+      {
+        title: "豊臣秀吉 人物モデル記録",
+        description: "豊臣秀吉に関する人物モデルの研究記録。",
+        category: "研究資料",
+        url: "record-hideyoshi.html",
+        keywords: ["人物モデル", "豊臣秀吉", "秀吉"]
+      }
+    ];
+
+    // 通常のサイト閲覧では目立たない内部資料
     const restrictedResults = [
       {
-        title: "【資料】人物モデル 織田信長の応答記録",
-        url: "record.html",
-        description: "分類：内部検証資料。人物モデルの応答に関する検証記録です。",
-        keywords: ["人物モデル"]
-      },
-      {
-        title: "【資料】人物モデル 徳川家康の応答記録",
-        url: "record-ieyasu.html",
-        description: "分類：内部検証資料。人物モデルの応答傾向および一貫性に関する検証記録です。",
-        keywords: ["人物モデル"]
-      },
-      {
-        title: "【資料】人物モデル 豊臣秀吉の応答記録",
-        url: "record-hideyoshi.html",
-        description: "分類：内部検証資料。人物モデルの対話傾向に関する検証記録です。",
-        keywords: ["人物モデル"]
-      },
-      {
-        title: "【内部資料】人物調査記録：神崎史郎",
+        title: "人物調査記録",
+        description: "所長に関する人物情報および関連記録。",
+        category: "人物調査記録",
         url: "record-kanzaki.html",
-        description: "分類：所内限定。歴史再現計画の発案者に関する人物調査記録です。",
         keywords: ["神崎史郎", "人物調査記録"]
       },
       {
-        title: "【内部資料】人物調査記録：調査対象者",
+        title: "人物調査記録",
+        description: "研究補助部門 職員基本情報・勤務評価。",
+        category: "人物調査記録",
         url: "record-friend.html",
-        description: "分類：所内限定。研究所に関係する人物についての調査記録です。",
         keywords: ["人物調査記録"]
       }
     ];
 
     const form = document.getElementById("searchForm");
     const input = document.getElementById("searchInput");
-    const results = document.getElementById("results");
+    const resultsArea = document.getElementById("resultsArea");
 
-    function runSearch() {
-      const query = input.value.trim().toLowerCase();
-
-      results.replaceChildren();
-
-      if (!query) return;
-
-      const heading = document.createElement("h2");
-      heading.className = "result-heading";
-      heading.textContent = "検索結果";
-      results.appendChild(heading);
-
-      const matches = pages.filter(page =>
-        (page.title + " " + page.description + " " + page.keywords)
-          .toLowerCase()
-          .includes(query)
-      );
-
-      matches.forEach(page => {
-        const article = document.createElement("article");
-        article.className = "result";
-
-        const link = document.createElement("a");
-        link.href = page.url;
-
-        const title = document.createElement("h2");
-        title.textContent = page.title;
-
-        const description = document.createElement("p");
-        description.textContent = page.description;
-
-        link.appendChild(title);
-        article.appendChild(link);
-        article.appendChild(description);
-        results.appendChild(article);
-      });
-
-      const matchedRestrictedResults = restrictedResults.filter(record =>
-        record.keywords.some(keyword => query.includes(keyword.toLowerCase()))
-      );
-
-      matchedRestrictedResults.forEach(record => {
-        const article = document.createElement("article");
-        article.className = "restricted";
-
-        const label = document.createElement("div");
-        label.className = "restricted-label";
-        label.textContent = "RESTRICTED RECORD";
-
-        const link = document.createElement("a");
-        link.href = record.url;
-
-        const title = document.createElement("h2");
-        title.textContent = record.title;
-
-        const description = document.createElement("p");
-        description.textContent = record.description;
-
-        link.appendChild(title);
-        article.appendChild(label);
-        article.appendChild(link);
-        article.appendChild(description);
-        results.appendChild(article);
-      });
-
-      if (matches.length === 0 && matchedRestrictedResults.length === 0) {
-        const empty = document.createElement("p");
-        empty.className = "empty";
-        empty.textContent =
-          "一致する情報は見つかりませんでした。キーワードを変更して、もう一度検索してください。";
-        results.appendChild(empty);
-      }
+    function showInitialState() {
+      resultsArea.innerHTML = `
+        <div class="initial-state">
+          <p>検索キーワードを入力してください。</p>
+          <p>
+            例：
+            <button type="button" data-query="研究所">研究所</button>　
+            <button type="button" data-query="人物モデル">人物モデル</button>
+          </p>
+        </div>
+      `;
     }
 
-    form.addEventListener("submit", function(event) {
+    function createResultElement(item) {
+      const link = document.createElement("a");
+      link.className = "result-item";
+      link.href = item.url;
+
+      const category = document.createElement("div");
+      category.className = "result-category";
+      category.textContent = item.category;
+
+      const title = document.createElement("div");
+      title.className = "result-title";
+      title.textContent = item.title;
+
+      const description = document.createElement("p");
+      description.className = "result-description";
+      description.textContent = item.description;
+
+      const meta = document.createElement("div");
+      meta.className = "result-meta";
+      meta.textContent = "歴史再現研究所";
+
+      link.append(category, title, description, meta);
+
+      return link;
+    }
+
+    function search(query) {
+      const normalizedQuery = query.trim().toLowerCase();
+
+      resultsArea.replaceChildren();
+
+      if (!normalizedQuery) {
+        showInitialState();
+        return;
+      }
+
+      /*
+       * 完全な検索語句に対応する資料を優先。
+       * 内部資料は登録されたキーワードに一致した場合のみ表示。
+       */
+      const allResults = [
+        ...publicResults,
+        ...researchRecords,
+        ...restrictedResults
+      ];
+
+      const matchedResults = allResults.filter(item =>
+        item.keywords.some(keyword =>
+          normalizedQuery.includes(keyword.toLowerCase())
+        )
+      );
+
+      const heading = document.createElement("div");
+      heading.className = "result-heading";
+
+      const headingTitle = document.createElement("h2");
+      headingTitle.textContent = "検索結果";
+
+      const count = document.createElement("span");
+      count.className = "result-count";
+      count.textContent = `${matchedResults.length}件`;
+
+      heading.append(headingTitle, count);
+      resultsArea.appendChild(heading);
+
+      if (matchedResults.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent =
+          "該当するページは見つかりませんでした。検索語句を変更してください。";
+        resultsArea.appendChild(empty);
+        return;
+      }
+
+      matchedResults.forEach(item => {
+        resultsArea.appendChild(createResultElement(item));
+      });
+    }
+
+    form.addEventListener("submit", event => {
       event.preventDefault();
 
       const query = input.value.trim();
-      if (!query) return;
+      const params = new URLSearchParams();
+
+      if (query) {
+        params.set("q", query);
+        history.pushState({}, "", "search.html?" + params.toString());
+      } else {
+        history.pushState({}, "", "search.html");
+      }
+
+      search(query);
+    });
+
+    // 検索例をクリックしたとき
+    resultsArea.addEventListener("click", event => {
+      const button = event.target.closest("button[data-query]");
+
+      if (!button) return;
+
+      const query = button.dataset.query;
+      input.value = query;
+      search(query);
 
       const params = new URLSearchParams();
       params.set("q", query);
-
-      window.location.href = "search.html?" + params.toString();
+      history.pushState({}, "", "search.html?" + params.toString());
     });
 
+    // URLに ?q=人物調査記録 などが付いている場合
     const params = new URLSearchParams(window.location.search);
-    const initialQuery = params.get("q");
+    const initialQuery = params.get("q") || "";
 
-    if (initialQuery) {
-      input.value = initialQuery;
-      runSearch();
-    }
+    input.value = initialQuery;
+    search(initialQuery);
+
+    // ブラウザの戻る・進むにも対応
+    window.addEventListener("popstate", () => {
+      const currentParams = new URLSearchParams(
+        window.location.search
+      );
+      const query = currentParams.get("q") || "";
+
+      input.value = query;
+      search(query);
+    });
   </script>
 </body>
 </html>
