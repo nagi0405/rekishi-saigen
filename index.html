@@ -61,21 +61,17 @@
 
     nav a:hover { color: #1b4c7d; }
 
-    /* ==========================================
-       全画面ハッキング＆緩急演出オーバーレイ
-       ========================================== */
     #system-glitch-overlay {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      background: #020617; /* 紺・黒の固定背景 */
-      color: #38bdf8;
-      font-family: monospace;
+      background: #000000;
+      color: #00ff66;
+      font-family: "Courier New", Courier, monospace;
       z-index: 99999;
       display: none;
       flex-direction: column;
-      padding: 40px 7%;
+      padding: 20px 3%;
       overflow: hidden;
-      /* 裏トップへ飛ぶときのフェードアウト用 */
       transition: opacity 0.8s ease;
     }
 
@@ -84,42 +80,40 @@
     }
 
     .glitch-header {
-      font-size: 12px;
-      letter-spacing: 0.15em;
-      border-bottom: 1px solid #0284c7;
-      padding-bottom: 10px;
-      margin-bottom: 15px;
-      color: #7dd3fc;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      border-bottom: 1px solid #00ff66;
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      color: #00ff66;
+      opacity: 0.8;
     }
 
-    /* コードが下から上に流れるエリア */
     .glitch-code-stream {
       flex: 1;
-      font-size: 13px;
-      line-height: 1.8;
-      color: #38bdf8;
+      font-size: 11px;
+      line-height: 1.4;
+      color: #00ff66;
       white-space: pre-wrap;
+      word-break: break-all;
       overflow-y: hidden;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      border-left: 2px solid #0369a1;
-      padding-left: 16px;
     }
 
     .glitch-code-stream.shaking {
-      animation: textShake 0.08s infinite;
+      animation: textShake 0.05s infinite;
     }
 
     @keyframes textShake {
       0% { transform: translate(0, 0); }
-      25% { transform: translate(-1.5px, 1.5px); }
-      50% { transform: translate(1.5px, -1.5px); }
-      75% { transform: translate(-1.5px, -1.5px); }
+      25% { transform: translate(-2px, 2px); }
+      50% { transform: translate(2px, -2px); }
+      75% { transform: translate(-2px, -2px); }
       100% { transform: translate(0, 0); }
     }
 
-    /* 403エラー時の白色画面（パッと切り替わる） */
     #system-glitch-overlay.error-mode {
       background: #ffffff !important;
       color: #111111 !important;
@@ -148,12 +142,9 @@
     .error-title { font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 16px; }
     .error-desc { font-size: 13px; color: #64748b; line-height: 1.8; }
 
-    /* 全体フェードアウト用クラス */
     .fade-out {
       opacity: 0 !important;
     }
-
-    /* ------------------------------------------ */
 
     .hero {
       padding: 100px 7% 90px;
@@ -190,12 +181,10 @@
 </head>
 <body>
 
-  <!-- 7回連打時に発動する演出オーバーレイ -->
   <div id="system-glitch-overlay">
-    <div class="glitch-header">【SECURE_KERNEL // CONSOLE STREAM ACTIVE】</div>
+    <div class="glitch-header">root@hri-secure-core:~# tail -f /var/log/syslog --pid=4092 --bytes=65536</div>
     <div class="glitch-code-stream" id="code-stream-box"></div>
 
-    <!-- 途中でパッと切り替わる403エラー画面 -->
     <div class="error-box">
       <div class="error-code">403</div>
       <div class="error-title">Access Forbidden</div>
@@ -221,7 +210,6 @@
         <a href="research.html">研究・技術</a>
         <a href="achievements.html">研究実績</a>
       </nav>
-      <!-- 表側には検索欄なし -->
     </div>
   </header>
 
@@ -260,7 +248,7 @@
 
     <section class="section">
       <h2>研究実績</h2>
-      <p class="lead">現在は, 戦国時代を中心とした歴史上の人物を対象に、基礎検証用の人物モデルを構築しています。</p>
+      <p class="lead">現在は、戦国時代を中心とした歴史上の人物を対象に、基礎検証用の人物モデルを構築しています。</p>
       <a class="text-link" href="achievements.html">研究実績を見る →</a>
     </section>
 
@@ -292,22 +280,74 @@
       const codeStreamBox = document.getElementById('code-stream-box');
 
       const codeLines = [
-        "SYS_CORE: loading kernel modules... [OK]",
-        "MEM_MAP: 0x00007FFF5FBFF000 - 0x7FFF6FFFF000 [PROTECTED]",
-        "AUTH_CHECK: KANZAKI_SHIRO [SPECIAL_PRIVILEGE_LV9]",
-        "WARN: unhandled cognitive divergence in sub-routine [TOKUGAWA_02]",
-        "LOG_FILE: /var/log/hri/subterranean_record_14.dat [DELETED]",
-        "LOG_FILE: /var/log/hri/door_lock_17.dat [DELETED]",
-        "NOTICE: employee_status_override -> 'KIRYU_KOTARO' = 'resigned_voluntary'",
-        "EX_CODE: 0xDEADBEEF - ANOMALY DETECTED IN COGNITIVE CORE",
-        "INTRUSION_DETECTION: BYPASS_SUCCESSFUL // OVERRIDING SECURITY...",
-        "NET_CONFIG: establishing remote tunnel to /node/sub_db/sec_04...",
-        "SYNC_STATUS: cognitive_model_v4.2 [WARNING: UNSTABLE]",
-        "USER_OVERRIDE: root_privilege_granted_to_session",
-        "CRITICAL_ALERT: unauthorized query execution in progress...",
-        "SECURE_GATEWAY: intercepting incoming data stream...",
-        "KERNEL_PANIC_PREVENTION: active. forcing subsystem isolation...",
-        "ERROR: access violation detected at segment 0x00A4... aborting session."
+        "[    0.000000] Linux version 6.8.0-45-generic (buildd@lcy02-amd64-049) (gcc (Ubuntu 13.2.0-23ubuntu4) 13.2.0)",
+        "[    0.004122] Command line: BOOT_IMAGE=/boot/vmlinuz-6.8.0-45-generic root=UUID=8f9a2c11-e44b ro quiet splash",
+        "[    0.128490] ACPI: DSDT 0x000000007A3B1000 0x0004FA (v02 ALASKA A MIB     00000001 1.00000001)",
+        "[    0.492011] pci 0000:00:01.0: [10de:1eb8] type 00 class 0x030000 INTx -> GSI 16",
+        "[    1.029481] NET: Registered PF_INET protocol family",
+        "[    1.582910] Initializing USB Mass Storage driver...",
+        "[    2.109482] EXT4-fs (sda2): mounted filesystem with ordered data mode. Quota mode: none.",
+        "Initializing cgroup subsys cpuset",
+        "Initializing cgroup subsys cpu",
+        "Initializing cgroup subsys cpuacct",
+        "Linux security module initialized",
+        "SELinux:  Initializing.",
+        "AppArmor: AppArmor initialized",
+        "audit: initializing netlink socket (disabled)",
+        "ubsc_core: loading module v4.19.2-RELEASE [x86_64]",
+        "kmem_cache_create: tty_line_name (size=32) flags=0x1a cause=OK",
+        "NET: Registered PF_PACKET protocol family",
+        "IP-Config: Complete:",
+        "      device=eth0, addr=192.168.10.45, mask=255.255.255.0, gw=192.168.10.1",
+        "      host=hri-secure-node-01, domain=hri.local, nis-domain=(none)",
+        "ROOT_AUTH: validating cryptographic signature of /dev/sda3... [PASSED]",
+        "SECURITY_AUDIT: UID 0 (root) executed /usr/bin/su with pam_unix(su:session)",
+        "MEM_DUMP: 0x7fff5fbff000 - 0x7fff6ffff000 [RWPP] size=1048576 bytes",
+        "KERNEL: assertion failed at mm/slub.c:452 (kmem_cache_alloc_node)",
+        "WARNING: CPU: 2 PID: 14092 at kernel/sched/core.c:3214",
+        "Modules linked in: xt_conntrack nf_conntrack nf_defrag_ipv4 iptable_filter ip_tables x_tables",
+        "CPU: 2 PID: 14092 Comm: kworker/2:1 Tainted: G        W         6.8.0-45-generic #45",
+        "Hardware name: System Manufacturer System Product Name/PRIME Z690-P D4",
+        "RIP: 0010:native_queued_spin_lock_slowpath+0x18a/0x2b0",
+        "RSP: 0018:ffffb2454278fcf8 EFLAGS: 00000246",
+        "RAX: 0000000000000101 RBX: ffff98124a3b0000 RCX: 0000000000000000",
+        "RDX: 0000000000000001 RSI: ffff98124a3b0000 RDI: ffff98124a3b0040",
+        "RBP: ffffb2454278fd20 R08: 0000000000000001 R09: 0000000000000001",
+        "R10: ffff98110234a000 R11: 0000000000000000 R12: ffff98124a3b0040",
+        "R13: 0000000000000001 R14: 0000000000000000 R15: 0000000000000000",
+        "FS:  0x00007f9a2b1c3740(0000) GS:ffff9818bfc80000(0000) IDT: 0000000000000710",
+        "CR2: 00007f9a2b1c2000 CR3: 000000012a4b8000 CR4: 0000000000750ef0",
+        "PKRU: 00000000",
+        "Call Trace:",
+        " <TASK>",
+        " ? __warn+0x81/0x130",
+        " ? report_bug+0x171/0x1a0",
+        " ? handle_bug+0x3c/0x80",
+        " ? exc_invalid_op+0x17/0x70",
+        " ? asm_exc_invalid_op+0x1a/0x20",
+        " ? native_queued_spin_lock_slowpath+0x18a/0x2b0",
+        " _raw_spin_lock_irqsave+0x3e/0x50",
+        " try_to_wake_up+0x55/0x620",
+        " default_wake_function+0x12/0x20",
+        " autoremove_wake_function+0x16/0x40",
+        " __wake_up_common+0x78/0x140",
+        " __wake_up_common_lock+0x8a/0xc0",
+        " tty_keypress_flush_buffer+0x42/0x70",
+        " n_tty_receive_buf_common+0x312/0xd10",
+        " flush_to_ldisc+0xbc/0x130",
+        " process_one_work+0x1c4/0x3d0",
+        " worker_thread+0x256/0x3a0",
+        " kthread+0xf0/0x120",
+        " ret_from_fork+0x31/0x50",
+        " ret_from_fork_asm+0x1b/0x30",
+        " </TASK>",
+        "---[ end trace 0000000000000000 ]---",
+        "CRITICAL: SEC_CORE_EXCEPTION at 0xDEADBEEFCAFEBABE",
+        "SEGMENTATION FAULT (core dumped) -> /var/core/core.hri_sub_daemon.14092",
+        "OVERRIDE_AUTH_TOKEN: 0x99A8B2C1F4E50011 -> PRIVILEGE_ESCALATION_SUCCESS",
+        "ANOMALY_DETECTION: UNKNOWN_TERMINAL_ACCESS // BYPASSING FIREWALL...",
+        "DISPATCHING_PAYLOAD: /node/sub_db/sec_04/handler.bin [OK]",
+        "SYSTEM_HALT_WARNING: UNABLE TO RECOVER KERNEL HEAP INTEGRITY."
       ];
 
       logo.addEventListener('click', function(e) {
@@ -333,20 +373,18 @@
             } else {
               idx = 0;
             }
-          }, 40);
+          }, 15);
 
-          // 約3.5秒間コードを流したあとに、パッと403エラー白画面に切り替え
           setTimeout(() => {
             clearInterval(streamInterval);
             overlay.classList.add('error-mode');
             
-            // 白画面を約3秒間じっくり見せたあと、スーッと綺麗にフェードアウトして裏トップへ
             setTimeout(() => {
-              overlay.classList.add('fade-out'); // 白画面から全体がフェードアウト
+              overlay.classList.add('fade-out');
               
               setTimeout(() => {
                 window.location.href = "index-re.html";
-              }, 800); // フェードアウトの完了を待ってジャンプ
+              }, 800);
             }, 3000);
           }, 3500);
 
