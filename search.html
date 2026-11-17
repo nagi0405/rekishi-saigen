@@ -9,7 +9,6 @@
     body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Noto Sans JP", sans-serif; color: #243247; line-height: 1.9; background: #f8fafc; }
     a { color: inherit; text-decoration: none; }
 
-    /* 裏側の共通ヘッダー（すべて -re.html へ遷移） */
     header { padding: 22px 7%; display: flex; justify-content: space-between; align-items: center; gap: 24px; border-bottom: 1px solid #cbd5e1; background: #ffffff; }
     .brand { font-weight: 700; letter-spacing: .06em; white-space: nowrap; }
     .brand span { display: block; font-size: 10px; color: #0284c7; letter-spacing: .12em; font-weight: 400; }
@@ -30,12 +29,10 @@
 
     .result-count { font-size: 13px; color: #64748b; margin-bottom: 24px; border-bottom: 1px solid #cbd5e1; padding-bottom: 12px; }
 
-    /* 検索結果アイテム（資料リンクは黒反転デザインへの入り口として強調） */
     .result-list { display: flex; flex-direction: column; gap: 16px; }
     .result-item { background: #ffffff; border: 1px solid #cbd5e1; padding: 22px 26px; transition: border-color 0.2s, transform 0.15s; }
     .result-item:hover { border-color: #0284c7; }
 
-    /* 機密資料用のダーク反転プレビューカード */
     .result-item.classified {
       background: #0f172a;
       color: #f8fafc;
@@ -112,7 +109,6 @@
       document.getElementById('search-input').value = rawQuery;
       document.getElementById('query-display').textContent = rawQuery || '（未入力）';
 
-      // データベース定義（公開ページは -re.html へ、機密資料は反転ダークカラーの個別ページへ）
       const database = [
         {
           id: "PUBLIC_PAGE // DIRECTOR",
