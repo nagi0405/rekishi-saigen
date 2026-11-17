@@ -14,12 +14,16 @@
     .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; min-width: 0; }
     nav { display: flex; flex-wrap: wrap; gap: 10px 18px; font-size: 12px; color: #526174; align-items: center; }
     nav a:hover { color: #1b4c7d; }
+    
+    /* 7回連続タップされるまで非表示にする隠し検索欄 */
     .header-search { display: none; width: min(100%, 330px); gap: 6px; animation: fadeIn 0.3s ease; }
     .header-search.is-visible { display: flex; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    
     .header-search input { flex: 1; min-width: 0; padding: 7px 10px; border: 1px solid #cbd5e1; border-radius: 3px; font-size: 12px; }
     .header-search button { padding: 7px 12px; border: 0; border-radius: 3px; background: #173858; color: white; font-size: 12px; cursor: pointer; }
     .header-search button:hover { background: #244f7b; }
+    
     main { max-width: 1100px; margin: 0 auto; padding: 64px 7% 90px; }
     .eyebrow { color: #56718f; font-size: 12px; letter-spacing: .16em; }
     h1 { color: #102744; font-size: 36px; margin: 10px 0 24px; }
@@ -30,12 +34,14 @@
     .achievement-card { margin-top: 24px; padding: 28px; border: 1px solid #e1e7ef; background: #fafbfc; }
     .achievement-card .meta-info { display: inline-block; font-size: 11px; letter-spacing: .1em; color: #1b4c7d; border: 1px solid #b2c5d9; padding: 2px 8px; margin-bottom: 12px; background: #fff; }
     .achievement-card p { margin-bottom: 0; }
+    
     footer { background: #102744; color: #d4dfeb; font-size: 12px; text-align: center; }
     .footer-main { padding: 34px 7% 24px; }
     footer .brand { color: #fff; cursor: default; }
     footer .brand span { color: #aebdd0; }
     footer p { margin: 12px 0; }
     .fiction-notice { padding: 14px 20px; background: #0b192b; color: #aebdd0; font-size: 11px; line-height: 1.8; }
+    
     @media (max-width: 760px) {
       header { align-items: flex-start; flex-direction: column; }
       .header-right { align-items: flex-start; width: 100%; }
@@ -78,7 +84,7 @@
 
     <article class="achievement-card">
       <span class="meta-info">PROJECT-02 / SIMULATION</span>
-      <h3>思念型歴史個体（思念体）の基礎構築モデル</h3>
+      <h3>思念型歴史個体の基礎構築モデル</h3>
       <p>収集された史料および行動規範をもとに、特定の歴史上の人物における意思決定プロセスを再現・検証する基礎アルゴリズムを開発しました。</p>
     </article>
 
