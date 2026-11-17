@@ -61,93 +61,54 @@
 
     nav a:hover { color: #1b4c7d; }
 
-    /* 通常時の検索欄は非表示、連打後に常時表示させる */
-    .header-search { display: none; width: min(100%, 330px); gap: 6px; }
-    .header-search.is-visible { display: flex; }
-
-    .header-search input {
-      flex: 1;
-      min-width: 0;
-      padding: 7px 10px;
-      border: 1px solid #cbd5e1;
-      border-radius: 3px;
-      font-size: 12px;
-    }
-
-    .header-search button {
-      padding: 7px 12px;
-      border: 0;
-      border-radius: 3px;
-      background: #173858;
-      color: white;
-      font-size: 12px;
-      cursor: pointer;
-    }
-    .header-search button:hover { background: #244f7b; }
-
     /* ==========================================
-       画面全体バグ・コード羅列オーバーレイ演出
+       全画面ハッキング・403エラー演出オーバーレイ
        ========================================== */
     #system-glitch-overlay {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(2, 6, 23, 0.96);
+      background: #020617; /* 後ろのページが絶対に透けない不透明な黒 */
       color: #38bdf8;
       font-family: monospace;
       z-index: 99999;
       display: none;
       flex-direction: column;
-      padding: 40px 7%;
+      padding: 50px 8%;
       overflow: hidden;
     }
 
     #system-glitch-overlay.active {
       display: flex;
-      animation: subtleShake 0.15s infinite;
+      animation: subtleShake 0.12s infinite;
     }
 
     @keyframes subtleShake {
       0% { transform: translate(0, 0); }
-      20% { transform: translate(-1px, 1px); }
-      40% { transform: translate(-1px, -1px); }
-      60% { transform: translate(1px, 1px); }
-      80% { transform: translate(1px, -1px); }
+      25% { transform: translate(-1px, 1px); }
+      50% { transform: translate(1px, -1px); }
+      75% { transform: translate(-1px, -1px); }
       100% { transform: translate(0, 0); }
     }
 
     .glitch-header {
-      font-size: 13px;
+      font-size: 12px;
       letter-spacing: 0.15em;
       border-bottom: 1px solid #0284c7;
-      padding-bottom: 10px;
+      padding-bottom: 12px;
       margin-bottom: 20px;
       color: #7dd3fc;
     }
 
     .glitch-code-stream {
       flex: 1;
-      font-size: 12px;
-      line-height: 1.6;
+      font-size: 13px;
+      line-height: 1.7;
       color: #38bdf8;
       white-space: pre-wrap;
       overflow-y: auto;
-      margin-bottom: 24px;
       border-left: 2px solid #0369a1;
-      padding-left: 14px;
+      padding-left: 16px;
     }
-
-    .glitch-close-btn {
-      align-self: flex-end;
-      padding: 10px 24px;
-      background: #0369a1;
-      color: #fff;
-      border: none;
-      font-family: monospace;
-      cursor: pointer;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-    }
-    .glitch-close-btn:hover { background: #0284c7; }
 
     /* ------------------------------------------ */
 
@@ -179,7 +140,6 @@
     @media (max-width: 760px) {
       header { align-items: flex-start; flex-direction: column; }
       .header-right { align-items: flex-start; width: 100%; }
-      .header-search { width: 100%; }
       .hero { padding-top: 64px; padding-bottom: 60px; }
       .section { padding-top: 46px; padding-bottom: 46px; }
     }
@@ -187,11 +147,10 @@
 </head>
 <body>
 
-  <!-- 7回連打時にぶわーっと全画面にコードが流れる演出オーバーレイ -->
+  <!-- 7回連打時に出現する全画面ハッキング＆403エラー演出オーバーレイ -->
   <div id="system-glitch-overlay">
-    <div class="glitch-header">【WARNING: OVERRIDE SYSTEM INITIALIZED // HRI_SECURE_CHANNEL】</div>
+    <div class="glitch-header" id="overlay-title">【WARNING: OVERRIDE SYSTEM INITIALIZED // HRI_SECURE_CHANNEL】</div>
     <div class="glitch-code-stream" id="code-stream-box"></div>
-    <button class="glitch-close-btn" id="glitch-close">ターミナルを閉じる（検索欄を開く）</button>
   </div>
 
   <header>
@@ -208,11 +167,7 @@
         <a href="research.html">研究・技術</a>
         <a href="achievements.html">研究実績</a>
       </nav>
-
-      <form class="header-search" id="secret-search" action="search.html" method="get">
-        <input type="search" name="q" placeholder="内部キーワードを入力…" aria-label="サイト内検索" required>
-        <button type="submit">検索</button>
-      </form>
+      <!-- 表側には通常の検索欄は置かない（完全なクリーン状態） -->
     </div>
   </header>
 
@@ -279,17 +234,11 @@
       let clickCount = 0;
       let clickTimer = null;
       const logo = document.getElementById('secret-logo');
-      const searchForm = document.getElementById('secret-search');
       const overlay = document.getElementById('system-glitch-overlay');
       const codeStreamBox = document.getElementById('code-stream-box');
-      const closeBtn = document.getElementById('glitch-close');
+      const overlayTitle = document.getElementById('overlay-title');
 
-      // 既にセッション内で解除済みなら、最初から検索欄を表示しておく
-      if (sessionStorage.getItem('hri_secret_unlocked') === 'true') {
-        searchForm.classList.add('is-visible');
-      }
-
-      // ぶわーっと流れるコードの断片
+      // ぶわーっと流れるコード ＆ 403エラー風の演出テキスト
       const codeLines = [
         "SYS_CORE: loading kernel modules... [OK]",
         "MEM_MAP: 0x00007FFF5FBFF000 - 0x7FFF6FFFF000 [PROTECTED]",
@@ -299,9 +248,10 @@
         "LOG_FILE: /var/log/hri/door_lock_17.dat [DELETED]",
         "NOTICE: employee_status_override -> 'KIRYU_KOTARO' = 'resigned_voluntary'",
         "EX_CODE: 0xDEADBEEF - ANOMALY DETECTED IN COGNITIVE CORE",
-        "INTRUSION_DETECTION: BYPASS_SUCCESSFUL // WELCOME, RESEARCHER.",
+        "INTRUSION_DETECTION: BYPASS_SUCCESSFUL // OVERRIDING SECURITY...",
         "-------------------------------------------------------------",
-        "READY FOR DEEP DATABASE QUERY..."
+        "ERROR 403: ACCESS DENIED FOR PUBLIC USER.",
+        "REDIRECTING TO SECURE INTERNAL DATABASE..."
       ];
 
       logo.addEventListener('click', function(e) {
@@ -314,8 +264,6 @@
         }, 1200);
 
         if (clickCount >= 7) {
-          sessionStorage.setItem('hri_secret_unlocked', 'true');
-          
           // 全画面オーバーレイを表示して揺らす
           overlay.classList.add('active');
           
@@ -326,22 +274,25 @@
             if (idx < codeLines.length) {
               codeStreamBox.textContent += (idx > 0 ? "\n" : "") + codeLines[idx];
               codeStreamBox.scrollTop = codeStreamBox.scrollHeight;
+              
+              // 終盤に差し掛かったら403エラー風の表示に切り替える
+              if (idx === codeLines.length - 2) {
+                overlayTitle.textContent = "【HTTP ERROR 403: FORBIDDEN / PRIVILEGE REQUIRED】";
+                overlayTitle.style.color = "#f43f5e"; // 赤っぽい警告色
+              }
+              
               idx++;
             } else {
               clearInterval(streamInterval);
+              // コードが流れきった1.5秒後に、自動的に検索ページ（search.html）へ強制転送！
+              setTimeout(() => {
+                window.location.href = "search.html";
+              }, 1200);
             }
-          }, 60);
+          }, 50);
 
           clickCount = 0;
         }
-      });
-
-      // 閉じるボタンを押したらオーバーレイが消えて、右上の検索欄が常時出現する
-      closeBtn.addEventListener('click', function() {
-        overlay.classList.remove('active');
-        searchForm.classList.add('is-visible');
-        const input = searchForm.querySelector('input');
-        if (input) input.focus();
       });
     })();
   </script>
