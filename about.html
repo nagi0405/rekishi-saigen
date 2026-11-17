@@ -9,35 +9,24 @@
     body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Noto Sans JP", sans-serif; color: #243247; line-height: 1.9; background: #fff; }
     a { color: inherit; text-decoration: none; }
     header { padding: 22px 7%; display: flex; justify-content: space-between; align-items: center; gap: 24px; border-bottom: 1px solid #e5eaf0; }
-    .brand { font-weight: 700; letter-spacing: .06em; white-space: nowrap; cursor: pointer; user-select: none; }
+    .brand { font-weight: 700; letter-spacing: .06em; white-space: nowrap; cursor: default; user-select: none; }
     .brand span { display: block; font-size: 10px; color: #718096; letter-spacing: .12em; font-weight: 400; }
-    .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; min-width: 0; }
     nav { display: flex; flex-wrap: wrap; gap: 10px 18px; font-size: 12px; color: #526174; align-items: center; }
     nav a:hover { color: #1b4c7d; }
-    .header-search { display: none; width: min(100%, 330px); gap: 6px; animation: fadeIn 0.3s ease; }
-    .header-search.is-visible { display: flex; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
-    .header-search input { flex: 1; min-width: 0; padding: 7px 10px; border: 1px solid #cbd5e1; border-radius: 3px; font-size: 12px; }
-    .header-search button { padding: 7px 12px; border: 0; border-radius: 3px; background: #173858; color: white; font-size: 12px; cursor: pointer; }
-    .header-search button:hover { background: #244f7b; }
     main { max-width: 1100px; margin: 0 auto; padding: 64px 7% 90px; }
     .eyebrow { color: #56718f; font-size: 12px; letter-spacing: .16em; }
     h1 { color: #102744; font-size: 36px; margin: 10px 0 24px; }
-    h2 { color: #102744; font-size: 23px; margin-top: 42px; }
+    h2 { color: #102744; font-size: 23px; margin-top: 42px; border-bottom: 2px solid #e5eaf0; padding-bottom: 8px; }
     p { color: #526174; }
-    .lead { font-size: 16px; max-width: 800px; }
-    .info-block { margin-top: 24px; padding: 24px; background: #f7f9fc; border-left: 3px solid #244f7b; }
-    .info-block h3 { color: #183957; margin-top: 0; }
+    .lead { max-width: 820px; }
     footer { background: #102744; color: #d4dfeb; font-size: 12px; text-align: center; }
     .footer-main { padding: 34px 7% 24px; }
-    footer .brand { color: #fff; cursor: default; }
+    footer .brand { color: #fff; }
     footer .brand span { color: #aebdd0; }
     footer p { margin: 12px 0; }
     .fiction-notice { padding: 14px 20px; background: #0b192b; color: #aebdd0; font-size: 11px; line-height: 1.8; }
     @media (max-width: 760px) {
       header { align-items: flex-start; flex-direction: column; }
-      .header-right { align-items: flex-start; width: 100%; }
-      .header-search { width: 100%; }
       main { padding-top: 44px; }
       h1 { font-size: 30px; }
     }
@@ -45,82 +34,36 @@
 </head>
 <body>
   <header>
-    <a class="brand" href="index.html" id="secret-logo">歴史再現研究所<span>HISTORICAL RECONSTRUCTION INSTITUTE</span></a>
-    <div class="header-right">
-      <nav>
-        <a href="index.html">トップ</a>
-        <a href="about.html">研究所について</a>
-        <a href="director.html">所長挨拶</a>
-        <a href="research.html">研究・技術</a>
-        <a href="achievements.html">研究実績</a>
-      </nav>
-      <form class="header-search" id="secret-search" action="search.html" method="get">
-        <input type="search" name="q" placeholder="データベース検索（キーワードを入力）…" aria-label="サイト内検索" required>
-        <button type="submit">検索</button>
-      </form>
-    </div>
+    <a class="brand" href="index.html">歴史再現研究所<span>HISTORICAL RECONSTRUCTION INSTITUTE</span></a>
+    <nav>
+      <a href="index.html">トップ</a>
+      <a href="about.html">研究所について</a>
+      <a href="director.html">所長挨拶</a>
+      <a href="research.html">研究・技術</a>
+      <a href="achievements.html">研究実績</a>
+    </nav>
   </header>
 
   <main>
-    <div class="eyebrow">ABOUT THE INSTITUTE</div>
+    <div class="eyebrow">ABOUT US</div>
     <h1>研究所について</h1>
-    <p class="lead">歴史再現研究所は、歴史資料の分析と人工知能技術を組み合わせ、歴史上の人物の価値観や判断傾向を多角的に検証することを目的とした研究機関です。</p>
+    <p class="lead">歴史再現研究所は、歴史的史料の解析および人間行動モデルの構築を通じて、過去の事象や人物の判断プロセスを多角的に検証することを目的として設立された研究機関です。</p>
 
-    <h2>設立の目的</h2>
-    <p>歴史上の人物について、私たちが知ることのできる情報の多くは、文献や記録を通じて伝えられています。しかし、残された記録だけでは、その人物が何を考え、どのような判断を下したのかを十分に理解できない場合があります。</p>
-    <p>当研究所では、現存する史料を整理・分析し、歴史上の人物の思考や判断の傾向を検討するための研究基盤を構築しています。</p>
+    <h2>設立の背景と理念</h2>
+    <p>現代における歴史研究は、多くの文献や記録のデジタル化が進む一方で、それらの膨大なデータを統合的に解釈し、「当時の人間がどのような認識のもとで行動したか」を再現・検証するアプローチには、さらなる発展の余地があります。</p>
+    <p>当研究所では、歴史学的アプローチと情報科学的手法を融合させることで、過去の記録を単なる「結果」ではなく、動的な「プロセス」として再評価することを目指しています。</p>
 
-    <h2>基本方針</h2>
-    <div class="info-block">
-      <h3>史料に基づく検証</h3>
-      <p>研究の出発点は、現存する史料と記録です。確認できる事実と、分析によって導かれた推定を区別して取り扱います。</p>
-    </div>
-    <div class="info-block">
-      <h3>継続的な記録と評価</h3>
-      <p>検証過程で得られた結果を記録し、モデルの再現性と応答の傾向を継続的に評価します。</p>
-    </div>
-    <div class="info-block">
-      <h3>想定外の結果の取り扱い</h3>
-      <p>事前の想定と一致しない結果についても、発生条件と内容を記録し、検証の対象とします。</p>
-    </div>
-
-    <h2>主な活動</h2>
-    <p>歴史資料の収集・分析、人物モデルの構築、対話シミュレーションを中心に、歴史的な人物像を多角的に理解するための研究を行っています。</p>
+    <h2>主な取り組み</h2>
+    <p>国内外の史料・書簡・公的記録等のテキストデータを緻密に分析し、特定の歴史的局面における人物の判断傾向や意思決定の構造をモデル化する基礎研究を進めています。</p>
   </main>
 
   <footer>
     <div class="footer-main">
       <div class="brand">歴史再現研究所<span>HISTORICAL RECONSTRUCTION INSTITUTE</span></div>
-      <p>歴史資料の分析と思念体の研究を通じて、新たな理解を目指します。</p>
+      <p>歴史資料の分析と人物モデルの研究を通じて、新たな理解を目指します。</p>
       <p>© Historical Reconstruction Institute</p>
     </div>
     <div class="fiction-notice">当サイトはフィクションです。掲載されている人物・団体・研究内容は創作であり、実在のものとは関係ありません。</div>
   </footer>
-
-  <script>
-    (function() {
-      let clickCount = 0;
-      let clickTimer = null;
-      const logo = document.getElementById('secret-logo');
-      const searchForm = document.getElementById('secret-search');
-
-      logo.addEventListener('click', function(e) {
-        e.preventDefault();
-        clickCount++;
-
-        clearTimeout(clickTimer);
-        clickTimer = setTimeout(() => {
-          clickCount = 0;
-        }, 1200);
-
-        if (clickCount >= 7) {
-          searchForm.classList.add('is-visible');
-          const input = searchForm.querySelector('input');
-          if (input) input.focus();
-          clickCount = 0;
-        }
-      });
-    })();
-  </script>
 </body>
 </html>
