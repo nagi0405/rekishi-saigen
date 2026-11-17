@@ -283,7 +283,7 @@
       const overlay = document.getElementById('system-glitch-overlay');
       const codeStreamBox = document.getElementById('code-stream-box');
 
-      // コードの量を増やして長めに流す
+      // たっぷりめのコード行
       const codeLines = [
         "SYS_CORE: loading kernel modules... [OK]",
         "MEM_MAP: 0x00007FFF5FBFF000 - 0x7FFF6FFFF000 [PROTECTED]",
@@ -297,7 +297,10 @@
         "NET_CONFIG: establishing remote tunnel to /node/sub_db/sec_04...",
         "SYNC_STATUS: cognitive_model_v4.2 [WARNING: UNSTABLE]",
         "USER_OVERRIDE: root_privilege_granted_to_session",
-        "CRITICAL_ALERT: unauthorized query execution in progress..."
+        "CRITICAL_ALERT: unauthorized query execution in progress...",
+        "SECURE_GATEWAY: intercepting incoming data stream...",
+        "KERNEL_PANIC_PREVENTION: active. forcing subsystem isolation...",
+        "ERROR: access violation detected at segment 0x00A4... aborting session."
       ];
 
       logo.addEventListener('click', function(e) {
@@ -315,7 +318,6 @@
           
           codeStreamBox.textContent = "";
           let idx = 0;
-          // スピードを少し速く設定（35ミリ秒間隔）
           const streamInterval = setInterval(() => {
             if (idx < codeLines.length) {
               codeStreamBox.textContent += (idx > 0 ? "\n" : "") + codeLines[idx];
@@ -324,18 +326,18 @@
             } else {
               idx = 0;
             }
-          }, 35);
+          }, 40);
 
-          // コードが流れている途中に、プツッと403エラー白画面に強制切り替え
+          // 約3.5秒間しっかりコードを流してから403エラーへ
           setTimeout(() => {
             clearInterval(streamInterval);
             overlay.classList.add('error-mode');
             
-            // 403画面をしっかり長め（約2.2秒）に見せてから、裏トップへジャンプ
+            // 403白画面を約3秒間じっくり見せてから裏トップへ
             setTimeout(() => {
               window.location.href = "index-re.html";
-            }, 2200);
-          }, 2200);
+            }, 3000);
+          }, 3500);
 
           clickCount = 0;
         }
