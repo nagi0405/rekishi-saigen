@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>歴史再現研究所 [SECURE DATABASE] | Historical Reconstruction Institute</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Noto Sans JP", sans-serif;
+      color: #243247;
+      line-height: 1.9;
+      background: #f8fafc; /* 裏の世界は少しだけ無機質な色味に変更 */
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      padding: 22px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      border-bottom: 1px solid #cbd5e1;
+      background: #ffffff;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: .06em;
+      white-space: nowrap;
+      cursor: default;
+      user-select: none;
+    }
+
+    .brand span {
+      display: block;
+      font-size: 10px;
+      color: #0284c7; /* 裏の世界のアクセントに青系を採用 */
+      letter-spacing: .12em;
+      font-weight: 400;
+    }
+
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      font-size: 12px;
+      color: #334155;
+      align-items: center;
+    }
+
+    nav a:hover { color: #0284c7; }
+
+    /* ==========================================
+       常設されているサイト内検索欄（裏の世界の証）
+       ========================================== */
+    .header-search {
+      display: flex;
+      width: min(100%, 340px);
+      gap: 6px;
+      background: #0f172a;
+      padding: 6px;
+      border: 1px solid #334155;
+      border-radius: 2px;
+    }
+
+    .header-search input {
+      flex: 1;
+      min-width: 0;
+      padding: 6px 10px;
+      border: 1px solid #475569;
+      background: #1e293b;
+      color: #f8fafc;
+      font-size: 12px;
+      border-radius: 2px;
+    }
+    .header-search input:focus { outline: 1px solid #38bdf8; }
+
+    .header-search button {
+      padding: 6px 12px;
+      border: 0;
+      background: #0369a1;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+    .header-search button:hover { background: #0284c7; }
+
+    /* ------------------------------------------ */
+
+    .hero {
+      padding: 100px 7% 90px;
+      background: linear-gradient(120deg, #e2e8f0, #ffffff);
+    }
+
+    .eyebrow { color: #0369a1; font-size: 12px; letter-spacing: .16em; font-weight: 600; }
+    h1 { color: #0f172a; font-size: clamp(32px, 5vw, 54px); line-height: 1.5; letter-spacing: .04em; margin: 16px 0 24px; }
+    .hero p { max-width: 680px; color: #334155; }
+    .section { padding: 64px 7%; background: #ffffff; margin-bottom: 12px; }
+    .section.alt { background: #f1f5f9; }
+    h2 { color: #0f172a; font-size: 24px; margin: 0 0 16px; }
+    h3 { color: #1e293b; font-size: 17px; margin-top: 0; }
+    .lead { max-width: 760px; color: #475569; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 28px; }
+    .card { border: 1px solid #cbd5e1; padding: 24px; background: #ffffff; }
+    .card p { font-size: 14px; color: #475569; margin-bottom: 0; }
+    .text-link { display: inline-block; margin-top: 14px; color: #0369a1; font-size: 13px; font-weight: 600; }
+
+    footer { background: #0f172a; color: #94a3b8; font-size: 12px; text-align: center; }
+    .footer-main { padding: 34px 7% 24px; }
+    footer .brand { color: #ffffff; cursor: default; }
+    footer .brand span { color: #38bdf8; }
+    footer p { margin: 12px 0; }
+    .fiction-notice { padding: 14px 20px; background: #020617; color: #64748b; font-size: 11px; line-height: 1.8; }
+
+    @media (max-width: 760px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .header-right { align-items: flex-start; width: 100%; }
+      .header-search { width: 100%; }
+      .hero { padding-top: 64px; padding-bottom: 60px; }
+      .section { padding-top: 46px; padding-bottom: 46px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="brand" href="index-re.html">
+      歴史再現研究所
+      <span>HISTORICAL RECONSTRUCTION INSTITUTE [SECURE_NODE]</span>
+    </a>
+
+    <div class="header-right">
+      <nav>
+        <a href="index-re.html">トップ</a>
+        <a href="about-re.html">研究所について</a>
+        <a href="director-re.html">所長挨拶</a>
+        <a href="research-re.html">研究・技術</a>
+        <a href="achievements-re.html">研究実績</a>
+      </nav>
+
+      <!-- 検索欄が常設された裏の特権データベース検索バー -->
+      <form class="header-search" action="search.html" method="get">
+        <input type="search" name="q" placeholder="内部データベース検索コードを入力…" aria-label="サイト内検索" required>
+        <button type="submit">解析</button>
+      </form>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">RESTRICTED AREA // SECURE DATABASE ACCESS</div>
+      <h1>歴史を、理解するために。</h1>
+      <p>歴史資料の分析と人工知能技術を組み合わせ、過去を生きた人物の価値観や判断、行動を多角的に検証する。それが、歴史再現研究所の取り組みです。</p>
+      <p>私たちは、史料に残された記録を出発点として、人物像の構築と対話シミュレーションに関する研究を進めています。</p>
+    </section>
+
+    <section class="section">
+      <h2>研究所について</h2>
+      <p class="lead">歴史上の人物を単なる記録上の存在として捉えるのではなく、その人物が何を重視し、どのように判断したのかを検討する。歴史再現研究所は、そのための研究基盤の構築を目指しています。</p>
+      <a class="text-link" href="about-re.html">研究所について詳しく見る →</a>
+    </section>
+
+    <section class="section alt">
+      <h2>主な研究領域</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>歴史資料の収集・分析</h3>
+          <p>文献や記録を整理し、人物の言動や時代背景を多角的に分析します。</p>
+        </article>
+        <article class="card">
+          <h3>思念体構築モデル</h3>
+          <p>史料に基づき、人物の価値観や判断傾向を反映したモデルを構築します。</p>
+        </article>
+        <article class="card">
+          <h3>対話シミュレーション</h3>
+          <p>構築したモデルとの対話を通じ、歴史的な判断や応答の傾向を検証します。</p>
+        </article>
+      </div>
+      <a class="text-link" href="research-re.html">研究・技術について詳しく見る →</a>
+    </section>
+
+    <section class="section">
+      <h2>研究実績</h2>
+      <p class="lead">現在は、戦国時代を中心とした歴史上の人物を対象に、基礎検証用の人物モデルを構築しています。</p>
+      <a class="text-link" href="achievements-re.html">研究実績を見る →</a>
+    </section>
+
+    <section class="section alt">
+      <h2>研究にあたって</h2>
+      <p class="lead">私たちは、史料から得られる情報と、モデルによる推定を区別して記録することを重視しています。事前の想定と一致しない応答についても、発生条件と内容を記録し、検証の対象とします。</p>
+      <a class="text-link" href="director-re.html">所長挨拶を読む →</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-main">
+      <div class="brand">
+        歴史再現研究所
+        <span>HISTORICAL RECONSTRUCTION INSTITUTE</span>
+      </div>
+      <p>歴史資料の分析と人物モデルの研究を通じて、新たな理解を目指します。</p>
+      <p>© Historical Reconstruction Institute</p>
+    </div>
+    <div class="fiction-notice">当サイトはフィクションです。掲載されている人物・団体・研究内容は創作であり、実在のものとは関係ありません。</div>
+  </footer>
+
+</body>
+</html>
